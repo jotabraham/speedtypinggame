@@ -1,7 +1,18 @@
 window.addEventListener('load', init);
 
 //Global vars to use in functions
-let time = 5;
+
+//available levels (this is an object)
+const levels = {
+    easy: 5,
+    medium: 3,
+    hard: 1
+}
+
+//to change level (calling obj above^)
+const currentLevel =levels.easy;
+
+let time = currentLevel;
 let score = 0;
 let isPlaying;
 
@@ -27,7 +38,7 @@ const words = [
     'construction',
     'silly',
     'telephone',
-    'butts',
+    'subscribed',
     'rocker',
     'philosophy',
     'application',
@@ -61,19 +72,52 @@ const words = [
     'abraham',
     'catastrophic',
     'again',
-    'supercalophragalisticexpealidotious',
+    'sophisticated',
     'yes',
     'nutrition'
 ];
 
 // Initialize Game
 function init() {
+    //show number of seconds in UI
+    seconds.innerHTML = currentLevel;
     // Load word from array
     showWord(words);
+    //start matching word input
+    wordInput.addEventListener('input', startMatch);
     //call countdown every second aka 1000 milsec
     setInterval(countdown, 1000);
     //check game status
     setInterval(checkStatus, 50);
+}
+
+//start match
+function startMatch() {
+    if (matchWords()) {
+        isPlaying = true;
+        time = currentLevel + 1;
+        showWord(words);
+        wordInput.value = '';
+        score++;
+    }
+
+    //if score -1 display 0
+    if (score === -1){
+        scoreDisplay.innerHTML = 0;
+    } else {
+        scoreDisplay.innerHTML = score;
+    }
+}
+
+//match currentWord to wordInput
+function matchWords() {
+    if (wordInput.value === currentWord.innerHTML) {
+        message.innerHTML = 'Correct!';
+        return true;
+    } else {
+        message.innerHTML = '';
+        return false;
+    }
 }
 
 //pick and show random word
@@ -101,6 +145,7 @@ function countdown() {
 //check game status
 function checkStatus() {
     if(!isPlaying && time === 0) {
-        message.innerHTML = 'u L0sE!';
+        message.innerHTML = 'Sorry! Game over.';
+        score = -1;
     }
 }
