@@ -74,7 +74,25 @@ const words = [
     'again',
     'sophisticated',
     'yes',
-    'nutrition'
+    'nutrition',
+    'glacier',
+    'wolf',
+    'planet',
+    'river',
+    'brooklyn',
+    'preview',
+    'gift',
+    'animation',
+    'bowl',
+    'dagger',
+    'unpopular',
+    'announcement',
+    'mandate',
+    'witness',
+    'horrible',
+    'county',
+    'apparently',
+    'gargantuan'
 ];
 
 // Initialize Game
